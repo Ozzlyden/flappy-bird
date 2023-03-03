@@ -26,6 +26,7 @@ import com.victor.entities.Entity;
 import com.victor.entities.Player;
 import com.victor.graficos.Spritesheet;
 import com.victor.graficos.UI;
+import com.victor.world.TuboGenerator;
 
 public class Game extends Canvas implements Runnable,KeyListener,MouseListener, MouseMotionListener{
 	
@@ -33,8 +34,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	public static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	public static final int WIDTH = 160;
-	public static final int HEIGHT = 120;
+	public static final int WIDTH = 240;
+	public static final int HEIGHT = 160;
 	public static final int SCALE = 3;
 	
 	private BufferedImage image;
@@ -45,9 +46,11 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	
 	public static Player player;
 	
+	public static TuboGenerator tubogenerator;
+	
 	public UI ui;
 	
-	public static int score = 0;
+	public static double score = 0;
 		
 	
 	public Game() {
@@ -71,7 +74,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		entities = new ArrayList<Entity>();
 		
 		//INICIALIZANDO OBJETOS
-		player = new Player(WIDTH / 2 - 50, HEIGHT / 2, 16, 16, 2, spritesheet.getSprite(0, 0, 16, 16));
+		player = new Player(WIDTH / 2 - 70, HEIGHT / 2, 16, 16, 2, spritesheet.getSprite(0, 0, 16, 16));
+		tubogenerator =new TuboGenerator();
 		ui = new UI();
 		
 		entities.add(player);
@@ -124,6 +128,8 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	
 	
 	public void tick () {
+		
+		tubogenerator.tick();
 		
 		for(int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
@@ -202,12 +208,17 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	//TECLADO
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			player.isPressed = true;
+		}
 				
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			player.isPressed = false;
+		}
 	}
 
 	@Override

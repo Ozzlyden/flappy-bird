@@ -58,8 +58,8 @@ public class World {
 	
 	public static void restartGame(String level){
 		//new Game();
-		
-		Game.player = new Player(0, 0, 16, 16, 2, Game.spritesheet.getSprite(0, 0, 16, 16));
+		Game.score = 0;
+		Game.player = new Player(Game.WIDTH / 2 - 70, Game.HEIGHT / 2, 16, 16, 2, Game.spritesheet.getSprite(0, 0, 16, 16));
 		Game.entities.clear();
 		Game.entities.add(Game.player);
 		return;
