@@ -33,7 +33,7 @@ public class Entity {
 	
 	protected List <Node> path;
 	
-	private BufferedImage sprite;
+	protected BufferedImage sprite;
 	
 	public static Random rand = new Random();
 	
