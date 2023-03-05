@@ -29,7 +29,10 @@ public class Player extends Entity {
 		if(!isPressed) {
 			y+=2;
 		}else {
-			y-=2;
+			if(y > 0) {
+				y-=2;
+
+			}
 		}
 		
 		if(y > Game.HEIGHT) {
